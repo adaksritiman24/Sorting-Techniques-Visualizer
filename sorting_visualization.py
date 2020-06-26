@@ -196,6 +196,7 @@ class Bubble:
 		self.arr = arr
 		self.len = len(arr)
 		self.arr =np.array(self.arr)
+
 	def sort(self, temp):
 		self.temp = temp
 		for i in range(self.len):
@@ -216,6 +217,7 @@ class Template():
 		self.height = 700
 		self.width = 1000
 		self.bars = np.linspace(-460,460,30)
+		self.r = True
 		self.draw()
 
 	def draw(self):	
@@ -234,25 +236,40 @@ class Template():
 
 
 	def bubble_sort(self):
-		self.y = Bubble(self.list)
-		self.y.sort(self)
+		if self.r:
+			self.r =False
+			self.y = Bubble(self.list)
+			self.y.sort(self)
+			self.r= True
 
 	def merge_sort(self):
-		self.y = Merge(self.list)
-		self.y.start(self)	
+		if self.r:
+			self.r =False
+			self.y = Merge(self.list)
+			self.y.start(self)	
+			self.r = True
 
 	def quick_sort(self):
-		self.y = Quick(self.list)
-		self.y.start(self)	
+		if self.r:
+			self.r = False
+			self.y = Quick(self.list)
+			self.y.start(self)	
+			self.r =True
 
 	def insertion_sort(self):
-		self.y = Insertion(self.list)
-		self.y.sort(self)	
+		if self.r:
+			self.r = False
+			self.y = Insertion(self.list)
+			self.y.sort(self)	
+			self.r =True
 
 	def heap_sort(self):
-		self.y = Heap(self.list)
-		self.y.heapify(self)
-		self.y.sort()					
+		if self.r:
+			self.r = False
+			self.y = Heap(self.list)
+			self.y.heapify(self)
+			self.y.sort()
+			self.r = True					
 
 	def draw_height(self):
 		self.list = []
@@ -270,11 +287,12 @@ class Template():
 			self.t.sety(-310 + (self.h/5)*10)
 			self.ts.append(self.t)
 	def randomise(self):
-		l = []
-		for i in range(30):
-			self.h = random.randint(2, 100)
-			l.append(self.h)
-		self.move_height(l)	
+		if self.r:
+			l = []
+			for i in range(30):
+				self.h = random.randint(2, 100)
+				l.append(self.h)
+			self.move_height(l)	
 				
 	def move_height(self, l):
 		for i in range(len(l)):
